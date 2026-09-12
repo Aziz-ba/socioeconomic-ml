@@ -1,0 +1,198 @@
+Machine Learning Project
+
+The goal of the machine learning project is to build a predictive model from a realistic data
+set. The construction of the model can be implemented either in Python (using Scikit-learn and
+other packages) or in R (with caret or with the tidymodel packages).
+
+1
+
+Data files
+
+The data studied in this project are stored in several CSV files documented below. They concern
+100000 French persons (from Metropolitan France). The goal the project is to build a predictive
+model for the target variable. This variable represents an undisclosed characteristic related to
+the person’s socio-economical status taken in a broad sense.
+The data set has been split into a learning set with 50001 persons and a test set with 49999
+persons. Each set is described by four csv files:
+• learn_dataset.csv and test_dataset.csv contain the main description of the persons
+in the data set, with the target variable only in learn_dataset.csv;
+• learn_datataset_job.csv and test_datataset_job.csv describe the jobs of the persons
+with an employee status;
+• learn_dataset_Emp_type.csv and test_dataset_Emp_type.csv give the type of job of
+each person with a job (including non employee);
+• learn_dataset_SPORTS.csv and test_dataset_SPORTS.csv contain information about
+persons who are registered to sport clubs.
+Details about the file are provided below.
+
+1.1
+
+Persons
+
+Persons are described by the following variables:
+• UNIQUE_ID: primary key (unique identifier);
+• CURRENT_AGE: age;
+• SEX: sex;
+• Familty_type: family type;
+• DEGREE: highest diploma;
+• ACT: activity type;
+• is_student: true if the person is a student;
+• Occupation_42: socio-professional category (PCS 2003 norm, see below);
+• insee_code: INSEE code of the city of residence.
+1
+
+1.2
+
+Job
+
+The current jobs of persons with an employee status are described with the following variables:
+• UNIQUE_ID: foreign key to the person table;
+• activity_sector: economic sector of the job;
+• TERMS_OF_EMP: work contract type;
+• job_category: type of job (regular, intersnship, etc.);
+• WORK_CONDITION: job terms (full-time, part-time, etc.);
+• working_hours: total annual working hours (this variable has missing values);
+• Employer_type: type of employers;
+• Employee_count: size of the company;
+• job_dep: department in which the job is located;
+• work_description: description of the job according to the PCS-ESE 2017 norm (see
+below);
+• pay: annual salary of the person.
+
+1.3
+
+Job type
+
+The job type of all persons with a job is given by the Emp_type variable in the associated csv file.
+The link with the person file is provided by the foreign key UNIQUE_ID. Notice that persons with
+a job do not necessarily have an employee status.
+
+1.4
+
+Sport
+
+When a person is registered in a sport club, the corresponding club is described by a SPORTS
+variable in the associated csv file. The link with the person file is provided by the foreign key
+UNIQUE_ID.
+
+1.5
+
+Categorical variables and geography
+
+Most variables are categorical. The possible values are listed and documented in CSV files named
+after the variables (e.g. code_DEGREE.csv for the DEGREE variable). Notice that those files have
+been produced by INSEE and are written in French. The PCS-ESE 2017 INSEE norm is described
+by the following files:
+• code_work_description.csv contains the association between codes and profession;
+• code_work_description_map.csv contains a mapping between the complete codes (N3)
+used in the data set and two coarser representations (N1 and N2);
+• code_work_description_n2.csv contains the association between codes and profession
+groups a the N2 level;
+• code_work_description_n1.csv contains the association between codes and profession
+groups a the N1 level.
+2
+
+The PCS 2003 is a complementary norm which adds modalities to the N2 level of the PCS-ESE
+2017. Codes are given in code_Occupation_42.csv
+Geographical and administrative information about metropolitan French cities is contained in
+several files:
+• city_adm.csv contains administrative information:
+– Nom de la commune: city name
+– insee_code: INSEE code of the city;
+– dep: code of the department of the city;
+– city_type: city type (modalities are administrative city category);
+• city_loc.csv contains geographical information, the GPS coordinates of the cities expressed
+in the WSG 84 system1 as well as in the Lambert-93 projection2 . The Lambert-93 coordinates
+can be used to compute distances (in meters) between cities with a reasonable precision in
+metropolitan France. Attributes:
+– insee_code: INSEE code of the city;
+– LAT: latitude;
+– LONG: longitude;
+– X: X Lambert coordinate;
+– Y: Y Lambert coordinate;
+• city_pop.csv contains population information:
+– insee_code: INSEE code of the city;
+– inhabitants: population of the city.
+• deparments.csv contains departments information:
+– Nom du département: department name;
+– dep: code of the department;
+– reg: code of the region to which the department belongs.
+• regions.csv contains region information (from 2018):
+– Nom de la région: region name;
+– reg: code of the region.
+Sport clubs are affiliated to sport federations which are themselves sorted into several broad
+categories, as document in code_SPORTS.csv
+1
+2
+
+https://en.wikipedia.org/wiki/World_Geodetic_System
+https://en.wikipedia.org/wiki/Lambert_conformal_conic_projection
+
+3
+
+2
+
+Expected results
+
+The goal of the project is to build a predictive model for the target variable given the other
+variables. More precisely, you are expected to
+• build a predictive model using the learning data;
+• estimate the future performances of the model on new data;
+• provide the prediction of your model on the test set.
+The following rules must obeyed:
+• at least two different machine learning algorithms must be compared. It is recommend to
+include a linear model and a random forest among them;
+• the use of a resampling technique to select the best model is mandatory (this can be for
+instance v-fold cross-validation for general models, and leave-one-out or out-of-bag estimates
+for specific ones);
+• the main meta-parameters of the machine learning algorithms must be selected via a
+resampling technique;
+• observations with missing data cannot be removed from the test set.
+In addition, it is recommended:
+• to debug your program on a sub-sample of the learning set, given its relatively large size;
+• to complement the core data set (i.e. the general description of the persons) by information
+contained in other files (jobs, sports, geography, etc.);
+• to use category simplification/grouping if needed for categorical variables. In particular,
+most predictive models will have difficulties with the work_description variable if used
+directly. It is acceptable to use of external data to simplify the categories;
+• external data can be used to complement the features.
+
+3
+
+Project submission
+
+The results of the project must be submitted as a single zip file containing:
+• a report on the predictive analysis (exclusively in pdf format, other format will be discarded):
+this report should be short and very precise. It should outline the methodology used to
+construct the chosen model. More precisely it should answer to the following questions:
+– What external data were added beyond the one provided as part of the project?
+– What data were used to build the models? (this can depend on the model)
+– What pre-processing were conducted? (this can also depend on the model)
+– What models were tested and what was the grid of meta-parameters used to tune each
+of them?
+– What resampling method was used to select the meta-parameters and the final model?
+
+4
+
+The report must contain an estimation of the expected quality of the predictions on new data
+reported in the form of the coefficient of determination (r-squared) and of the mean squared
+error. Additional assessment of the model and of its predictions will be appreciated (this
+can include an analysis of important variables, graphical representation of the predictions,
+etc.);
+• a file named predictions.csv with the predicted values of target on the test set, using
+the following convention
+– the file must contain two columns in this order
+∗ UNIQUE_ID: the foreign key that links a prediction to the person in the test set;
+∗ target: the prediction itself;
+– the file must be in CSV format, with commas as the separation character;
+– decimal numbers must use the standard US representation (e.g. 2.5).
+• the full code used to perform the analysis.
+Notice that no manual editing of the data files via e.g. excel is permitted. In particular, if data
+files must be combined, this has to be done with R/Python.
+In addition, the quality of the predictions will play an important part in the marking of the
+project. This quality will be automatically computed from the predictions.csv file. If the file
+is not named correctly, if it does not follow the format specified above or if some predictions are
+missing, this part of the project will be considered as failed.
+
+5
+
+
