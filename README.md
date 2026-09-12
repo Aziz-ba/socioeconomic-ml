@@ -1,6 +1,6 @@
-# 🧑‍💼 Predicting Socio-Economic Status — a Multi-Model ML Project
+# 🧑‍💼 Predicting Socio-Economic Status - a Multi-Model ML Project
 
-An end-to-end **machine-learning project** on a realistic dataset of **100,000 people** (Metropolitan France). The goal: build a predictive model for an (undisclosed) target variable describing a person's **socio-economic status**, by combining several data sources — main demographics, jobs, employment type, sports registration, and geography.
+An end-to-end **machine-learning project** on a realistic dataset of **100,000 people** (Metropolitan France). The goal: build a predictive model for an (undisclosed) target variable describing a person's **socio-economic status**, by combining several data sources - main demographics, jobs, employment type, sports registration, and geography.
 
 The project is deliberately structured as a **progression of models**, each adding a new signal, so you can see how much each data source contributes.
 
@@ -23,10 +23,10 @@ python src/baseline.py
 | MAE | 5.49 |
 | RMSE | 7.19 |
 
-> The target is a continuous **socio-economic score** (0–92, mean 52.7).
+> The target is a continuous **socio-economic score** (0-92, mean 52.7).
 
-### 💡 Insight — what drives the score
-**Age and sex dominate.** `CURRENT_AGE` (0.46) and `SEX` (0.20) alone account for ~two-thirds of the model's feature importance; occupation, activity sector, degree and family type fill in the rest. A simple tree-based baseline already explains **~68% of the variance** — a strong reference point before the more elaborate models in the notebooks.
+### 💡 Insight - what drives the score
+**Age and sex dominate.** `CURRENT_AGE` (0.46) and `SEX` (0.20) alone account for ~two-thirds of the model's feature importance; occupation, activity sector, degree and family type fill in the rest. A simple tree-based baseline already explains **~68% of the variance** - a strong reference point before the more elaborate models in the notebooks.
 
 ---
 
@@ -70,7 +70,7 @@ pip install -r requirements.txt
 jupyter notebook notebooks/01_exploration_preprocessing.ipynb
 ```
 
-Work through the notebooks in order. Outputs were cleared to keep the repo light — re-run to regenerate them.
+Work through the notebooks in order. Outputs were cleared to keep the repo light - re-run to regenerate them.
 
 ---
 
