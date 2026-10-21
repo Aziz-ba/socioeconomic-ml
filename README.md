@@ -15,6 +15,8 @@ pip install -r requirements.txt
 python src/baseline.py
 ```
 
+The script (`src/baseline.py`) loads `data/learn_dataset.csv`, drops identifier columns (`UNIQUE_ID`, `insee_code`), one-hot encodes categoricals via `pd.get_dummies(drop_first=True)`, and trains a `RandomForestRegressor(n_estimators=200)` on an 80/20 train/test split.
+
 **Result** (80/20 split, 50k rows, 67 encoded features):
 
 | Metric | Value |
