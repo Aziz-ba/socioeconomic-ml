@@ -67,12 +67,22 @@ Each step is a controlled experiment: add a feature group, measure the effect.
 
 ## 🚀 Run it
 
-```bash
-pip install -r requirements.txt
-jupyter notebook notebooks/01_exploration_preprocessing.ipynb
-```
+1. **Install dependencies**:
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-Work through the notebooks in order. Outputs were cleared to keep the repo light - re-run to regenerate them.
+2. **Run the baseline model**:
+   ```bash
+   python src/baseline.py
+   ```
+   Trains the Random Forest regressor on `data/learn_dataset.csv` and prints R², MAE, RMSE, and the top 10 feature importances.
+
+3. **Explore the progression notebooks**:
+   ```bash
+   jupyter notebook notebooks/01_exploration_preprocessing.ipynb
+   ```
+   Work through the notebooks in order (`01` to `08`). Outputs were cleared to keep the repo light - re-run to regenerate them.
 
 ---
 
