@@ -16,6 +16,7 @@ ROOT = pathlib.Path(__file__).resolve().parent.parent
 df = pd.read_csv(ROOT / "data" / "learn_dataset.csv")
 
 TARGET, DROP = "target", ["UNIQUE_ID", "insee_code"]
+# One-hot encode categorical features; drop_first=True avoids the dummy variable trap
 X = pd.get_dummies(df.drop(columns=[TARGET] + DROP), drop_first=True)
 y = df[TARGET]
 
