@@ -15,10 +15,20 @@ from sklearn.metrics import r2_score, mean_absolute_error, mean_squared_error
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 df = pd.read_csv(ROOT / "data" / "learn_dataset.csv")
 
-TARGET, DROP = "target", ["UNIQUE_ID", "insee_code"]
-# One-hot encode categorical features; drop_first=True avoids the dummy variable trap
-X = pd.get_dummies(df.drop(columns=[TARGET] + DROP), drop_first=True)
-y = df[TARGET]
+def prepare_data(df: pd.DataFrame):
+    """Extract features and target, removing non-predictive identifiers.
+
+    Drops UNIQUE_ID (record key) and insee_code (geographic commune code)
+    before one-hot encoding categorical predictors with drop_first=True.
+    """
+    target = "target"
+    drop_cols = ["UNIQUE_ID", "insee_code"]
+    X = pd.get_dummies(df.drop(columns=[target] + drop_cols), drop_first=True)
+    y = df[target]
+    return X, y
+
+
+X, y = prepare_data(df)
 
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 model = RandomForestRegressor(n_estimators=200, n_jobs=-1, random_state=42)
